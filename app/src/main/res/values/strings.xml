@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TechnicalExam</string>
+
+    <string name="main_favorite_quote">Today is sacrifice, tomorrow is paradise.</string>
 </resources>
