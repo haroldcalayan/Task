@@ -1,27 +1,34 @@
 package net.decenternet.technicalexam.ui.tasks
 
-import net.decenternet.technicalexam.data.TaskLocalService
+import net.decenternet.technicalexam.data.TaskLocalServiceProvider
 import net.decenternet.technicalexam.domain.Task
 
-class TasksPresenter(taskLocalService: TaskLocalService?) : TasksContract.Presenter {
+class TasksPresenter(val view: TasksContract.View, val taskLocalService: TaskLocalServiceProvider) : TasksContract.Presenter {
 
-    override fun onAddTaskClicked() {
-        TODO("Not yet implemented")
+    override fun onAddTaskClicked(task: Task) {
+        taskLocalService.save(task)
+        getAllTasks()
     }
 
-    override fun onSaveTaskClicked(task: Task?) {
-        TODO("Not yet implemented")
+    override fun onSaveTaskClicked(task: Task) {
+        taskLocalService.update(task)
+        getAllTasks()
     }
 
     override fun onTaskChecked(taskId: Int) {
-        TODO("Not yet implemented")
+        taskLocalService.updateCompletion(taskId, true)
     }
 
     override fun onTaskUnchecked(taskId: Int) {
-        TODO("Not yet implemented")
+        taskLocalService.updateCompletion(taskId, false)
     }
 
     override fun onDeleteTaskClicked(taskId: Int) {
-        TODO("Not yet implemented")
+        taskLocalService.delete(taskId)
+        getAllTasks()
+    }
+
+    override fun getAllTasks() {
+        view.displayTasks(taskLocalService.findAll())
     }
 }

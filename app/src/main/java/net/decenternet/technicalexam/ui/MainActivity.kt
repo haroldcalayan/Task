@@ -2,28 +2,22 @@ package net.decenternet.technicalexam.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
+import androidx.databinding.DataBindingUtil
 import kotlinx.coroutines.*
 import net.decenternet.technicalexam.R
+import net.decenternet.technicalexam.databinding.ActivityMainBinding
 import net.decenternet.technicalexam.ui.tasks.TasksActivity
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var ivBrandingLogo: ImageView
-    private lateinit var textViewQuote: TextView
+    private lateinit var binding: ActivityMainBinding
 
     private val activityScope = CoroutineScope(Dispatchers.Main)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        ivBrandingLogo = findViewById(R.id.ivBrandingLogo)
-        textViewQuote = findViewById(R.id.textViewQuote)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         /**
          * Tasks
@@ -31,10 +25,8 @@ class MainActivity : AppCompatActivity() {
          * 2. Set any image that best illustrate the quote to ivBrandingLogo.
          * 3. Display this screen for 3 seconds, then redirect to TasksActivity and close this MainActivity.
          */
-
-        ivBrandingLogo.setImageResource(R.drawable.sacrifice_today)
-        textViewQuote.setText(R.string.main_favorite_quote)
-
+        binding.ivBrandingLogo.setImageResource(R.drawable.sacrifice_today)
+        binding.textViewQuote.setText(R.string.main_favorite_quote)
         startTimer(SCREEN_LIFE)
     }
 
