@@ -17,10 +17,6 @@ class TaskLocalServiceProvider : TaskLocalService {
                 sharedPreferences?.getString("tasks", "[]"),
                 object : TypeToken<List<Task?>?>() {}.type
             )
-
-        if (localTasks?.isEmpty() == true) {
-            loadInitialData()
-        }
     }
 
     override fun save(task: Task) {
@@ -54,7 +50,7 @@ class TaskLocalServiceProvider : TaskLocalService {
         updateDatabase(localTasks.orEmpty())
     }
 
-    private fun getNextId() = localTasks?.last()?.id?.plus(1) ?: 1
+    private fun getNextId() = if (localTasks.isNullOrEmpty()) 1 else localTasks?.last()?.id?.plus(1) ?: 1
 
     private fun updateDatabase(tasks: List<Task>) {
         val editor = sharedPreferences?.edit()
