@@ -1,4 +1,4 @@
-package net.decenternet.technicalexam.data
+package net.decenternet.technicalexam.data.repository
 
 import android.content.SharedPreferences
 import com.google.gson.Gson

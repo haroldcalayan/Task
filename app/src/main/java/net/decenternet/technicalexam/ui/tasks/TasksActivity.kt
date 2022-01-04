@@ -8,7 +8,7 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import net.decenternet.technicalexam.R
-import net.decenternet.technicalexam.data.TaskLocalServiceProvider
+import net.decenternet.technicalexam.data.repository.TaskLocalServiceProvider
 import net.decenternet.technicalexam.databinding.ActivityTasksBinding
 import net.decenternet.technicalexam.domain.Task
 import net.decenternet.technicalexam.ui.tasks.TasksContract.Presenter
@@ -60,7 +60,9 @@ class TasksActivity : AppCompatActivity(), TasksContract.View {
     }
 
     override fun displayTasks(tasks: List<Task>) {
-        adapter.updateData(tasks)
+        runOnUiThread {
+            adapter.updateData(tasks)
+        }
     }
 
     override fun addTaskToList(task: Task) {

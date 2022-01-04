@@ -1,4 +1,4 @@
-package net.decenternet.technicalexam.data
+package net.decenternet.technicalexam.data.repository
 
 import net.decenternet.technicalexam.domain.Task
 
